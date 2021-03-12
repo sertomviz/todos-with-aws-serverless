@@ -1,0 +1,19 @@
+Resources:
+  TodosDynamoDbTable:
+    Type: "AWS::DynamoDB::Table"
+    DeletionPolicy: Delete
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: todoId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: todoId
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      TableName: ${self:provider.environment.DYNAMODB_TABLE}
